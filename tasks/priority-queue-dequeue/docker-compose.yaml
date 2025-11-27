@@ -1,10 +1,11 @@
-version: '3.8'
-
 services:
-  test:
-    image: node:20
-    working_dir: /app
+  client:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    image: compiler-observer:latest
+    container_name: compiler-observability-test-build
+    command: ["sh", "-c", "tasks/priority-queue-dequeue/run-tests.sh"]
     volumes:
-      - ../../:/app
-    command: sh -c "npm install && npm run build && python3 -m pytest tasks/priority-queue-dequeue/task_tests.py -v"
-
+      - ../../:/app/project
+    working_dir: /app/project

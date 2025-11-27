@@ -1,14 +1,21 @@
 task_description: |
-  Fix the asynchronous task execution bug in TaskScheduler.start() method.
-  The handler() function is not being awaited, which causes tasks to execute
-  without proper error handling and completion tracking.
+  So I was debugging this issue with the TaskScheduler and noticed that tasks aren't executing properly. 
+  Looking at the start() method in src/scheduler/TaskScheduler.ts (which gets compiled to dist/scheduler/TaskScheduler.js), 
+  the handler() function calls aren't being awaited. This means the scheduler moves on before handlers finish, 
+  which breaks everything.
   
-  Expected behavior:
-  - All scheduled tasks should execute their handlers asynchronously
-  - Handlers should be properly awaited before removing tasks from the queue
-  - Errors in handlers should be caught and handled appropriately
-  - Tasks should only be removed after handler execution completes
-  - Multiple concurrent tasks should execute correctly
+  The problem is on line 28 where it just calls task.handler() without await. This causes handlers to fire off 
+  but the scheduler doesn't wait for them, so tasks get removed from the queue before they're actually done. 
+  Also, if a handler throws an error, it'll crash the whole scheduler loop since there's no try-catch.
+  
+  What needs to happen:
+  - Handlers need to be awaited so they actually complete before removal
+  - Error handling should wrap handler calls so one failing task doesn't kill the scheduler
+  - Tasks should execute in the correct order based on their executeAt timestamp (earlier ones first)
+  - Handler return values should be properly handled (even if they're just void)
+  - Nested async operations inside handlers need to complete fully
+  - Multiple tasks running at the same time should all complete properly
+  - The scheduler should keep running even if one task throws an error
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com

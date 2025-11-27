@@ -1,29 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
+task_identifier="${1:-BASE}"
 
-if [ -z "$1" ]; then
-    echo "Usage: ./run_tests.sh [task-id]"
-    echo "Example: ./run_tests.sh async-task-execution"
+if [[ "${task_identifier}" == "BASE" ]]; then
+  echo "== Running base tests =="
+  pytest -q -rA tests/base
+else
+  echo "== Running task tests for ${task_identifier} =="
+  test_file="tasks/${task_identifier}/task_tests.py"
+  if [[ ! -f "${test_file}" ]]; then
+    echo "Task tests not found: ${test_file}" >&2
     exit 1
+  fi
+  pytest -q -rA tests/base "${test_file}"
 fi
-
-TASK_ID=$1
-TASK_DIR="tasks/${TASK_ID}"
-
-if [ ! -d "$TASK_DIR" ]; then
-    echo "Error: Task directory $TASK_DIR does not exist"
-    exit 1
-fi
-
-cd "$(dirname "$0")"
-
-if [ ! -d "node_modules" ]; then
-    echo "Installing dependencies..."
-    npm install
-fi
-
-echo "Building TypeScript..."
-npm run build
-
-echo "Running tests for $TASK_ID..."
-python3 -m pytest "$TASK_DIR/task_tests.py" -v
 

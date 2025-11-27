@@ -1,13 +1,20 @@
 task_description: |
-  Fix the period key generation in AnalyticsEngine.getPeriodKey().
-  The current implementation doesn't pad month and date values, which can
-  cause incorrect grouping when months/dates are single digits.
+  Ugh, so I've been debugging this weird issue with the analytics aggregation and finally figured out what's wrong. 
+  The getPeriodKey() function in AnalyticsEngine (in src/analytics/AnalyticsEngine.ts) is totally broken when it comes 
+  to formatting dates. Like, it's generating keys like "2024-0-5" for January 5th instead of "2024-01-05", which completely 
+  screws up how things get grouped together.
   
-  Expected behavior:
-  - Period keys should be consistently formatted with zero-padding
-  - Keys should be sortable chronologically
-  - Same period should always generate the same key
-  - Keys should handle month and date boundaries correctly
+  The problem is that getMonth() returns 0-11 (not 1-12) and there's no zero-padding, so you end up with inconsistent 
+  strings. When you try to sort them, "2024-0-10" comes before "2024-0-2" alphabetically even though 2 should come first. 
+  It's super annoying because the aggregation results are all wrong.
+  
+  What I need is for the keys to always have zero-padding (so January is "01" not "0"), use UTC methods to avoid timezone 
+  headaches, and make sure they sort correctly chronologically. Also gotta handle the boundary cases - like when you cross 
+  into a new month or year, the keys should still work properly. The time comparisons in getMetrics() are also off - they 
+  use > and < instead of >= and <=, so boundary timestamps get excluded incorrectly.
+  
+  The file you need to fix is src/analytics/AnalyticsEngine.ts, specifically the getPeriodKey() method and the getMetrics() 
+  method. Spent way too long on this yesterday before realizing it was a formatting issue. Classic.
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com

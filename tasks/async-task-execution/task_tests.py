@@ -13,7 +13,7 @@ def test_task_handler_execution():
     Verifies that handlers complete before tasks are removed from queue.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     const executionOrder = [];
@@ -84,7 +84,7 @@ def test_task_handler_error_handling():
     Test that errors in task handlers are properly caught and don't crash the scheduler.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let schedulerRunning = true;
@@ -135,7 +135,7 @@ def test_task_removal_after_execution():
     Test that tasks are removed from the queue only after handler execution completes.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let handlerCompleted = false;
@@ -191,7 +191,7 @@ def test_concurrent_task_execution():
     Test that multiple concurrent tasks execute correctly with proper await handling.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     const executionResults = [];
@@ -242,7 +242,7 @@ def test_task_handler_return_value():
     Test that task handlers can return values and these are properly handled.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let returnValue = null;
@@ -291,7 +291,7 @@ def test_task_execution_order():
     Test that tasks execute in the correct order based on execution time.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     const executionOrder = [];
@@ -357,7 +357,7 @@ def test_nested_async_operations():
     Test that nested async operations in handlers are properly awaited.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let nestedCompleted = false;
