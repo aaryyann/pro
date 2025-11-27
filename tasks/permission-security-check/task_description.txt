@@ -1,0 +1,17 @@
+task_description: |
+  Fix the permission check logic to ensure proper security.
+  The current implementation in TransactionManager.hasPermission() returns
+  true for unknown roles, which is a security vulnerability.
+  
+  Expected behavior:
+  - Unknown roles should be denied (return false)
+  - Only roles with explicit permissions should be allowed
+  - Implement default deny security policy
+  - Edge cases with empty strings and null should be handled
+
+author_name: Adzzat
+author_email: aryanhonawar@gmail.com
+difficulty: medium
+category: security
+tags: [security, rbac, default-deny]
+parser_name: pytest

@@ -1,0 +1,17 @@
+task_description: |
+  Fix the transaction commit operation to ensure proper atomicity.
+  The current implementation doesn't handle partial failures correctly,
+  and transactions may be left in an inconsistent state.
+  
+  Expected behavior:
+  - All operations in a transaction should execute atomically
+  - If any operation fails, the entire transaction should be rolled back
+  - Transaction status should accurately reflect the commit result
+  - Operations should execute in the order they were added
+
+author_name: Adzzat
+author_email: aryanhonawar@gmail.com
+difficulty: hard
+category: transaction
+tags: [atomicity, transaction, error-handling]
+parser_name: pytest

@@ -1,0 +1,17 @@
+task_description: |
+  Fix the rollback operation to allow rolling back PENDING transactions.
+  Currently, rollback only works on COMMITTED transactions, but it should
+  also work on PENDING transactions that haven't been committed yet.
+  
+  Expected behavior:
+  - Rollback should work on both PENDING and COMMITTED transactions
+  - PENDING transactions should be marked as ROLLED_BACK
+  - COMMITTED transactions should also be rollbackable
+  - FAILED transactions should not be rollbackable
+
+author_name: Adzzat
+author_email: aryanhonawar@gmail.com
+difficulty: medium
+category: transaction
+tags: [rollback, transaction-state, state-management]
+parser_name: pytest

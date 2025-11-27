@@ -1,0 +1,17 @@
+task_description: |
+  Fix the period key generation in AnalyticsEngine.getPeriodKey().
+  The current implementation doesn't pad month and date values, which can
+  cause incorrect grouping when months/dates are single digits.
+  
+  Expected behavior:
+  - Period keys should be consistently formatted with zero-padding
+  - Keys should be sortable chronologically
+  - Same period should always generate the same key
+  - Keys should handle month and date boundaries correctly
+
+author_name: Adzzat
+author_email: aryanhonawar@gmail.com
+difficulty: medium
+category: analytics
+tags: [date-formatting, aggregation, string-formatting]
+parser_name: pytest

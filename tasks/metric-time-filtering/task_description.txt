@@ -1,0 +1,17 @@
+task_description: |
+  Fix the date comparison logic in AnalyticsEngine.getMetrics().
+  The current implementation uses strict inequality (>, <) which excludes
+  metrics at the exact boundary times. It should use inclusive comparison (>=, <=).
+  
+  Expected behavior:
+  - Metrics at startTime should be included
+  - Metrics at endTime should be included
+  - All metrics within the time range should be returned
+  - Edge cases with exact timestamps should be handled correctly
+
+author_name: Adzzat
+author_email: aryanhonawar@gmail.com
+difficulty: medium
+category: analytics
+tags: [date-comparison, filtering, edge-cases]
+parser_name: pytest

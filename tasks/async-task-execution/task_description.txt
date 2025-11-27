@@ -1,0 +1,18 @@
+task_description: |
+  Fix the asynchronous task execution bug in TaskScheduler.start() method.
+  The handler() function is not being awaited, which causes tasks to execute
+  without proper error handling and completion tracking.
+  
+  Expected behavior:
+  - All scheduled tasks should execute their handlers asynchronously
+  - Handlers should be properly awaited before removing tasks from the queue
+  - Errors in handlers should be caught and handled appropriately
+  - Tasks should only be removed after handler execution completes
+  - Multiple concurrent tasks should execute correctly
+
+author_name: Adzzat
+author_email: aryanhonawar@gmail.com
+difficulty: medium
+category: scheduler
+tags: [async, error-handling, concurrency]
+parser_name: pytest

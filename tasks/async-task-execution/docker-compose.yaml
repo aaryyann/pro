@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  test:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ../../:/app
+    command: sh -c "npm install && npm run build && python3 -m pytest tasks/async-task-execution/task_tests.py -v"
+
