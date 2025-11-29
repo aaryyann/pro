@@ -300,7 +300,8 @@ def test_task_scheduling_order_preservation():
         
         console.log(JSON.stringify({
             executionOrder: executionOrder,
-            bothExecuted: executionOrder.length === 2
+            bothExecuted: executionOrder.length === 2,
+            correctOrder: executionOrder.length === 2 && executionOrder[0] === 1 && executionOrder[1] === 2
         }));
     })();
     """
@@ -318,3 +319,6 @@ def test_task_scheduling_order_preservation():
     if output:
         data = json.loads(output.split('\n')[-1])
         assert data['bothExecuted'] == True
+        assert len(data['executionOrder']) == 2, f"Expected 2 tasks to execute, got {len(data['executionOrder'])}"
+        assert data['executionOrder'][0] == 1, f"Expected task1 to execute first, got {data['executionOrder'][0]}"
+        assert data['executionOrder'][1] == 2, f"Expected task2 to execute second, got {data['executionOrder'][1]}"

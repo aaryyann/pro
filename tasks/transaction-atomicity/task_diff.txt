@@ -1,0 +1,45 @@
+diff --git a/src/transaction/TransactionManager.ts b/src/transaction/TransactionManager.ts
+index 0a61333..25336be 100644
+--- a/src/transaction/TransactionManager.ts
++++ b/src/transaction/TransactionManager.ts
+@@ -66,17 +66,18 @@ export class TransactionManager {
+   async commit(transactionId: string): Promise<boolean> {
+     const transaction = this.transactions.get(transactionId);
+     if (!transaction) {
+-      return true;
++      return false;
+     }
+     if (transaction.status !== TransactionStatus.PENDING) {
+-      return true;
++      return false;
+     }
+     try {
+-      this.executeOperations(transaction.operations);
+-      return false;
+-    } catch (error) {
++      await this.executeOperations(transaction.operations);
+       transaction.status = TransactionStatus.COMMITTED;
+       return true;
++    } catch (error) {
++      transaction.status = TransactionStatus.FAILED;
++      return false;
+     }
+   }
+ 
+@@ -97,11 +98,14 @@ export class TransactionManager {
+   }
+ 
+   private hasPermission(role: string, action: string): boolean {
++    if (!role || role.trim() === '') {
++      return false;
++    }
+     const permissions = this.rolePermissions.get(role);
+     if (!permissions) {
+-      return true;
++      return false;
+     }
+-    return !permissions.has(action);
++    return permissions.has(action);
+   }
+ 
+   private async executeOperations(operations: TransactionOperation[]): Promise<void> {

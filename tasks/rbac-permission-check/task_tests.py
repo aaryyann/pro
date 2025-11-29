@@ -128,6 +128,7 @@ def test_empty_role_permission_denied():
     Test that empty string role is denied all permissions.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -143,6 +144,83 @@ def test_empty_role_permission_denied():
     console.log(JSON.stringify({
         operationAdded: result
     }));
+    })();
+    """
+    
+    result = subprocess.run(
+        ['node', '-e', script],
+        capture_output=True,
+        text=True,
+        timeout=5,
+        cwd=os.path.join(os.path.dirname(__file__), '../..')
+    )
+    
+    assert result.returncode == 0
+    output = result.stdout.strip()
+    if output:
+        data = json.loads(output.split('\n')[-1])
+        assert data['operationAdded'] == False
+
+def test_null_role_permission_denied():
+    """
+    Test that null role is denied all permissions.
+    """
+    script = """
+    (async () => {
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+    
+    const manager = new TransactionManager();
+    const txn = manager.createTransaction('user1', null);
+    
+    const result = manager.addOperation(txn.id, {
+        type: 'read',
+        resource: 'data1',
+        action: 'read',
+        data: {}
+    });
+    
+    console.log(JSON.stringify({
+        operationAdded: result
+    }));
+    })();
+    """
+    
+    result = subprocess.run(
+        ['node', '-e', script],
+        capture_output=True,
+        text=True,
+        timeout=5,
+        cwd=os.path.join(os.path.dirname(__file__), '../..')
+    )
+    
+    assert result.returncode == 0
+    output = result.stdout.strip()
+    if output:
+        data = json.loads(output.split('\n')[-1])
+        assert data['operationAdded'] == False
+
+def test_undefined_role_permission_denied():
+    """
+    Test that undefined role is denied all permissions.
+    """
+    script = """
+    (async () => {
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+    
+    const manager = new TransactionManager();
+    const txn = manager.createTransaction('user1', undefined);
+    
+    const result = manager.addOperation(txn.id, {
+        type: 'read',
+        resource: 'data1',
+        action: 'read',
+        data: {}
+    });
+    
+    console.log(JSON.stringify({
+        operationAdded: result
+    }));
+    })();
     """
     
     result = subprocess.run(

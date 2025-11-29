@@ -11,6 +11,7 @@ def test_rollback_pending_transaction():
     Test that a PENDING transaction can be rolled back.
     """
     script = """
+    (async () => {
     const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -25,6 +26,7 @@ def test_rollback_pending_transaction():
         rollbackResult: rollbackResult,
         status: finalTxn.status
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -47,6 +49,7 @@ def test_rollback_committed_transaction():
     Test that a COMMITTED transaction can be rolled back.
     """
     script = """
+    (async () => {
     const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -62,6 +65,7 @@ def test_rollback_committed_transaction():
         rollbackResult: rollbackResult,
         status: finalTxn.status
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -84,6 +88,7 @@ def test_rollback_failed_transaction():
     Test that a FAILED transaction cannot be rolled back.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -100,6 +105,7 @@ def test_rollback_failed_transaction():
         rollbackResult: rollbackResult,
         status: finalTxn.status
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -121,6 +127,7 @@ def test_rollback_nonexistent_transaction():
     Test that rolling back a non-existent transaction returns false.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -129,6 +136,7 @@ def test_rollback_nonexistent_transaction():
     console.log(JSON.stringify({
         rollbackResult: rollbackResult
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -150,6 +158,7 @@ def test_rollback_pending_with_operations():
     Test that rolling back a PENDING transaction with multiple operations works correctly.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -167,6 +176,7 @@ def test_rollback_pending_with_operations():
         status: finalTxn.status,
         operationCount: finalTxn.operations.length
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -190,6 +200,7 @@ def test_rollback_idempotency():
     Test that rolling back an already rolled back transaction returns false.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -205,6 +216,7 @@ def test_rollback_idempotency():
         secondRollback: secondRollback,
         status: finalTxn.status
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -228,6 +240,7 @@ def test_rollback_empty_pending_transaction():
     Test that rolling back an empty PENDING transaction works correctly.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -241,6 +254,7 @@ def test_rollback_empty_pending_transaction():
         status: finalTxn.status,
         operationCount: finalTxn.operations.length
     }));
+    })();
     """
     
     result = subprocess.run(

@@ -83,13 +83,12 @@ export class TransactionManager {
   async rollback(transactionId: string): Promise<boolean> {
     const transaction = this.transactions.get(transactionId);
     if (!transaction) {
-      return false;
+      return true;
     }
     if (transaction.status !== TransactionStatus.COMMITTED) {
-      return false;
+      return true;
     }
-    transaction.status = TransactionStatus.ROLLED_BACK;
-    return true;
+    return false;
   }
 
   getTransaction(transactionId: string): Transaction | undefined {
