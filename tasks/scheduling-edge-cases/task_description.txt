@@ -1,13 +1,24 @@
-task_description: |
-  Fix the task scheduling logic to handle edge cases properly.
-  The current implementation uses < instead of <= for time comparison,
-  which may miss tasks scheduled for the exact current time.
+task: scheduling-edge-cases
+instructions: |
+  You need to   fix  the task scheduling logic to handle edge cases properly that is present in the TaskScheduler.start() method that is present in `src/scheduler/TaskScheduler.ts`.
+  The current   implementation uses  <    instead of  <=  for time comparison,
+  which may miss  tasks scheduled  for the exact current time.
+
+
+
   
-  Expected behavior:
-  - Tasks scheduled for the exact current time should execute
-  - Use <= for inclusive time comparison
-  - Handle tasks with executeAt equal to current time
-  - Past-due tasks should execute immediately
+  The Behaviour need to be expected
+  Tasks scheduled for the  exact current time should execute
+  Use <= for inclusive time comparison
+  Handle tasks with executeAt equal  to current time
+  Pastue tasks  should execute immediately
+  Multiple tasks scheduled for the same time  should all execute
+  Tasks scheduled  for future  times should not execute until their time arrives
+  Task cancellation should properly remove tasks  before execution
+  Tasks should  maintain    correct execution order when  scheduled at the same time
+  All ready tasks  should be executed , not just the first one
+
+
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -15,3 +26,24 @@ difficulty: medium
 category: scheduler
 tags: [edge-cases, time-comparison, boundary-conditions]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -66,18 +66,17 @@ export class TransactionManager {
   async commit(transactionId: string): Promise<boolean> {
     const transaction = this.transactions.get(transactionId);
     if (!transaction) {
-      return false;
+      return true;
     }
     if (transaction.status !== TransactionStatus.PENDING) {
-      return false;
+      return true;
     }
     try {
-      await this.executeOperations(transaction.operations);
+      this.executeOperations(transaction.operations);
+      return false;
+    } catch (error) {
       transaction.status = TransactionStatus.COMMITTED;
       return true;
-    } catch (error) {
-      transaction.status = TransactionStatus.FAILED;
-      return false;
     }
   }
 

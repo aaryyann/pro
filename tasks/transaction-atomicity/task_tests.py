@@ -11,6 +11,7 @@ def test_transaction_commit_success():
     Test that a transaction with all successful operations commits correctly.
     """
     script = """
+    (async () => {
     const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -27,6 +28,7 @@ def test_transaction_commit_success():
         status: finalTxn.status,
         operationCount: finalTxn.operations.length
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -49,6 +51,7 @@ def test_transaction_commit_with_multiple_operations():
     Test that a transaction with multiple operations commits atomically.
     """
     script = """
+    (async () => {
     const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -66,6 +69,7 @@ def test_transaction_commit_with_multiple_operations():
         status: finalTxn.status,
         operationCount: finalTxn.operations.length
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -89,6 +93,7 @@ def test_transaction_empty_operations():
     Test that a transaction with no operations can be committed.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -102,6 +107,7 @@ def test_transaction_empty_operations():
         status: finalTxn.status,
         operationCount: finalTxn.operations.length
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -125,6 +131,7 @@ def test_transaction_operation_order():
     Test that operations execute in the order they were added.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -158,6 +165,7 @@ def test_transaction_operation_order():
         status: finalTxn.status,
         operations: finalTxn.operations.map(op => op.data.order)
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -180,6 +188,7 @@ def test_transaction_commit_idempotency():
     Test that committing an already committed transaction returns false.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -195,6 +204,7 @@ def test_transaction_commit_idempotency():
         secondCommit: secondCommit,
         status: finalTxn.status
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -218,6 +228,7 @@ def test_transaction_large_number_operations():
     Test that transactions with many operations commit correctly.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -240,6 +251,7 @@ def test_transaction_large_number_operations():
         status: finalTxn.status,
         operationCount: finalTxn.operations.length
     }));
+    })();
     """
     
     result = subprocess.run(
@@ -263,6 +275,7 @@ def test_transaction_nonexistent_id():
     Test that committing a non-existent transaction returns false.
     """
     script = """
+    (async () => {
     const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
@@ -271,6 +284,7 @@ def test_transaction_nonexistent_id():
     console.log(JSON.stringify({
         commitResult: commitResult
     }));
+    })();
     """
     
     result = subprocess.run(

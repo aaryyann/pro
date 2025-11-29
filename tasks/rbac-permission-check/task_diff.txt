@@ -1,0 +1,21 @@
+diff --git a/src/transaction/TransactionManager.ts b/src/transaction/TransactionManager.ts
+index cb48b59..25336be 100644
+--- a/src/transaction/TransactionManager.ts
++++ b/src/transaction/TransactionManager.ts
+@@ -98,11 +98,14 @@ export class TransactionManager {
+   }
+ 
+   private hasPermission(role: string, action: string): boolean {
++    if (!role || role.trim() === '') {
++      return false;
++    }
+     const permissions = this.rolePermissions.get(role);
+     if (!permissions) {
+-      return true;
++      return false;
+     }
+-    return !permissions.has(action);
++    return permissions.has(action);
+   }
+ 
+   private async executeOperations(operations: TransactionOperation[]): Promise<void> {

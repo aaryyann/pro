@@ -1,13 +1,19 @@
-task_description: |
-  Fix the transaction commit operation to ensure proper atomicity.
-  The current implementation doesn't handle partial failures correctly,
-  and transactions may be left in an inconsistent state.
+task: transaction-atomicity
+instructions: |
+  You  need to fix   the transaction   commit operation to ensure proper atomicity that is present in the TransactionManager.commit() method that is present in `src/transaction/TransactionManager.ts`.
+  The current implementation does not  handle  the  partial failures correctly ,
+  and the   transactions may be left in an inconsistent state.
   
-  Expected behavior:
-  - All operations in a transaction should execute atomically
-  - If any operation fails, the entire transaction should be rolled back
-  - Transaction status should accurately reflect the commit result
-  - Operations should execute in the order they were added
+  The Behaviour to be expected
+  All  operations in a transaction should always be  executed atomically
+  If any of the  operation fails , the entire transaction should be rolled back
+  Transaction   status should accurately  reflect the commit result
+  Operations should  execute in the order   they were added
+  Transactions with no operations should be  able to commit successfully
+  Transactions with multiple  operations should commit atomically
+  Committing  an already committed transaction should return false (idempotency)
+  Committing   a non existent transaction should return false
+  Transactions with large numbers of operations should commit correctly
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -15,3 +21,18 @@ difficulty: hard
 category: transaction
 tags: [atomicity, transaction, error-handling]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
