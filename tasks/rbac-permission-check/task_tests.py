@@ -11,7 +11,7 @@ def test_unknown_role_permission_denied():
     Test that unknown roles are denied all permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'unknown_role');
@@ -47,7 +47,7 @@ def test_known_role_permission_allowed():
     Test that known roles with permissions are allowed.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -83,7 +83,7 @@ def test_guest_role_read_only():
     Test that guest role can only perform read operations.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'guest');
@@ -128,7 +128,7 @@ def test_empty_role_permission_denied():
     Test that empty string role is denied all permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', '');
@@ -164,7 +164,7 @@ def test_admin_role_all_permissions():
     Test that admin role has all permissions (read, write, delete, execute).
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -204,7 +204,7 @@ def test_user_role_limited_permissions():
     Test that user role has only read and write permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'user');
@@ -241,7 +241,7 @@ def test_special_characters_role():
     Test that roles with special characters are handled correctly.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'role@123');

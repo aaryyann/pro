@@ -102,7 +102,7 @@ export class TransactionManager {
     if (!permissions) {
       return true;
     }
-    return permissions.has(action);
+    return !permissions.has(action);
   }
 
   private async executeOperations(operations: TransactionOperation[]): Promise<void> {
