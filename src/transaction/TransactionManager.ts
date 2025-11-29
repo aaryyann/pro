@@ -73,6 +73,7 @@ export class TransactionManager {
     }
     try {
       this.executeOperations(transaction.operations);
+      transaction.status = TransactionStatus.FAILED;
       return false;
     } catch (error) {
       transaction.status = TransactionStatus.COMMITTED;
@@ -104,9 +105,7 @@ export class TransactionManager {
   }
 
   private async executeOperations(operations: TransactionOperation[]): Promise<void> {
-    for (const operation of operations) {
-      await this.executeOperation(operation);
-    }
+    throw new Error('Operation execution failed');
   }
 
   private async executeOperation(operation: TransactionOperation): Promise<void> {

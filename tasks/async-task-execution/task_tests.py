@@ -13,9 +13,9 @@ def test_task_handler_execution():
     Verifies that handlers complete before tasks are removed from queue.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     const executionOrder = [];
     let handler1Completed = false;
     let handler2Completed = false;
@@ -85,9 +85,9 @@ def test_task_handler_error_handling():
     Scheduler must continue processing other tasks even after one fails.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     let schedulerRunning = true;
     let errorTaskExecuted = false;
     let successTaskExecuted = false;
@@ -159,9 +159,9 @@ def test_task_removal_after_execution():
     Test that tasks are removed from the queue only after handler execution completes.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     let handlerCompleted = false;
     
     const task = {
@@ -215,9 +215,9 @@ def test_concurrent_task_execution():
     Test that multiple concurrent tasks execute correctly with proper await handling.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     const executionResults = [];
     
     for (let i = 0; i < 5; i++) {
@@ -267,9 +267,9 @@ def test_task_handler_return_value():
     Also verifies handler completes before task is removed.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     let returnValue = null;
     let handlerStarted = false;
     let handlerCompleted = false;
@@ -334,9 +334,9 @@ def test_task_execution_order():
     Tasks scheduled for exact current time should also execute.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     const executionOrder = [];
     const now = Date.now();
     
@@ -418,9 +418,9 @@ def test_nested_async_operations():
     Test that nested async operations in handlers are properly awaited.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     let nestedCompleted = false;
     
     const task = {
@@ -472,9 +472,9 @@ def test_scheduler_polling_frequency():
     Verifies that tasks are picked up quickly after their execution time, indicating frequent polling.
     """
     script = """
-    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
+    const { AsyncTaskScheduler } = require('./dist/scheduler/AsyncTaskScheduler');
     
-    const scheduler = new TaskScheduler();
+    const scheduler = new AsyncTaskScheduler();
     let taskExecuted = false;
     let executionTime = null;
     const scheduledTime = Date.now() + 150;

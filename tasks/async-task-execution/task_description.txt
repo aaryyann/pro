@@ -1,6 +1,6 @@
 task: async-task-execution
 instructions: |
-  The  Task Scheduler  in `src/scheduler/TaskScheduler.ts` has  the issues with  such that how it executes the async task handlers. The scheduler  does not properly await the handlers, through which it causes tasks to be removed before they completely executed, and errors in the handlers crash the entire scheduler.
+  The  Task Scheduler  in `src/scheduler/AsyncTaskScheduler.ts` has  the issues with  such that how it executes the async task handlers. The scheduler  does not properly await the handlers, through which it causes tasks to be removed before they completely executed, and errors in the handlers crash the entire scheduler.
 
   The main problem is present  in the `start()` method is that   when a task's execution time arrives, the
   handler is called without using  `await`, so the scheduler instantaneously moves on forward and removes the task from the queue before the handler executes completely. This breaks async operations

@@ -10,7 +10,7 @@ instructions: |
   FAILED transactions should  not be rollbackable (returns false)  
   Non-existent transactions should return false when  rolled back
   PENDING   transactions with multiple operations should  be rollbackable (operations are preserved)
-  Rolling back  an already rolled back transaction should return false  (idempotency)
+  Rolling back  an already rolled back transaction should  return false  (idempotency)
   Empty PENDING transactions (with no operations) should be rollbackable
 
 author_name: Adzzat

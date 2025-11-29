@@ -1,0 +1,37 @@
+diff --git a/src/transaction/TransactionManager.ts b/src/transaction/TransactionManager.ts
+index 642d56a..03f38c3 100644
+--- a/src/transaction/TransactionManager.ts
++++ b/src/transaction/TransactionManager.ts
+@@ -83,9 +83,13 @@ export class TransactionManager {
+   async rollback(transactionId: string): Promise<boolean> {
+     const transaction = this.transactions.get(transactionId);
+     if (!transaction) {
+-      return true;
++      return false;
++    }
++    if (transaction.status === TransactionStatus.FAILED || transaction.status === TransactionStatus.ROLLED_BACK) {
++      return false;
+     }
+-    if (transaction.status !== TransactionStatus.COMMITTED) {
++    if (transaction.status === TransactionStatus.PENDING || transaction.status === TransactionStatus.COMMITTED) {
++      transaction.status = TransactionStatus.ROLLED_BACK;
+       return true;
+     }
+     return false;
+@@ -96,11 +100,14 @@ export class TransactionManager {
+   }
+ 
+   private hasPermission(role: string, action: string): boolean {
++    if (!role || role.trim() === '') {
++      return false;
++    }
+     const permissions = this.rolePermissions.get(role);
+     if (!permissions) {
+-      return true;
++      return false;
+     }
+-    return !permissions.has(action);
++    return permissions.has(action);
+   }
+ 
+   private async executeOperations(operations: TransactionOperation[]): Promise<void> {
