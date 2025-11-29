@@ -1,13 +1,18 @@
-task_description: |
-  Fix the permission check logic to ensure proper security.
-  The current implementation in TransactionManager.hasPermission() returns
-  true for unknown roles, which is a security vulnerability.
+task: permission-security-check
+instructions: |
+  You need to fix  the   permission check logic  to ensure proper security in the TransactionManager.hasPermission() method that is present in `src/transaction/TransactionManager.ts`.
+  The current implementation returns true  for unknown  roles, which is a security vulnerability.
   
-  Expected behavior:
-  - Unknown roles should be denied (return false)
-  - Only roles with explicit permissions should be allowed
-  - Implement default deny security policy
-  - Edge cases with empty strings and null should be handled
+  The Behaviour to be expected are 
+  The roles that are unknown  should be denied that means return false
+  The only roles that are  with explicit permissions should be allowed
+  Implement default deny security policy
+  The Edge cases with empty strings and null should always be handled
+  The  Case sensitive role matching   should be enforced (example as 'admin' is valid but 'Admin' or 'ADMIN' should be denied)
+
+
+
+
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -15,3 +20,28 @@ difficulty: medium
 category: security
 tags: [security, rbac, default-deny]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

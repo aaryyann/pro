@@ -11,7 +11,7 @@ def test_unknown_role_permission_denied():
     Test that unknown roles are denied all permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'hacker_role');
@@ -56,7 +56,7 @@ def test_empty_role_permission_denied():
     Test that empty or null roles are denied permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', '');
@@ -93,7 +93,7 @@ def test_null_role_permission_denied():
     Test that null role values are denied permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', null);
@@ -129,7 +129,7 @@ def test_whitespace_role_permission_denied():
     Test that roles with only whitespace are denied permissions.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', '   ');
@@ -165,7 +165,7 @@ def test_case_sensitive_role_matching():
     Test that role matching is case-sensitive and case variations are denied.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn1 = manager.createTransaction('user1', 'Admin');
@@ -204,7 +204,7 @@ def test_permission_check_all_actions():
     Test that permission checks work for all action types.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'unknown_role');

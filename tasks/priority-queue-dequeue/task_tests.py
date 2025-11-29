@@ -11,7 +11,7 @@ def test_priority_queue_dequeue_highest_priority():
     Test that dequeue returns the highest priority item first.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     queue.enqueue('low', 1);
@@ -50,7 +50,7 @@ def test_priority_queue_dequeue_empty():
     Test that dequeue returns null when queue is empty.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     const first = queue.dequeue();
@@ -82,7 +82,7 @@ def test_priority_queue_peek_consistency():
     Test that peek() returns the same item that dequeue() would return.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     queue.enqueue('item1', 5);
@@ -118,7 +118,7 @@ def test_priority_queue_multiple_same_priority():
     Test that items with the same priority are handled correctly.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     queue.enqueue('item1', 5);
@@ -155,7 +155,7 @@ def test_priority_queue_negative_priorities():
     Test that negative priorities work correctly.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     queue.enqueue('low', -10);
@@ -194,7 +194,7 @@ def test_priority_queue_size_after_dequeue():
     Test that queue size decreases correctly after dequeue operations.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     queue.enqueue('item1', 1);
@@ -233,7 +233,7 @@ def test_priority_queue_interleaved_operations():
     Test interleaved enqueue and dequeue operations maintain correct priority order.
     """
     script = """
-    const { PriorityQueue } = require('../../dist/scheduler/PriorityQueue');
+    const { PriorityQueue } = require('./dist/scheduler/PriorityQueue');
     
     const queue = new PriorityQueue();
     queue.enqueue('item1', 1);

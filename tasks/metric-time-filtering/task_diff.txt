@@ -1,10 +1,13 @@
 diff --git a/src/analytics/AnalyticsEngine.ts b/src/analytics/AnalyticsEngine.ts
-index 0461f4a..1af9478 100644
+index 81ee059..1af9478 100644
 --- a/src/analytics/AnalyticsEngine.ts
 +++ b/src/analytics/AnalyticsEngine.ts
-@@ -25,10 +25,10 @@ export class AnalyticsEngine {
+@@ -23,12 +23,12 @@ export class AnalyticsEngine {
+   }
+ 
    getMetrics(name: string, startTime?: Date, endTime?: Date): Metric[] {
-     let filtered = this.metrics.filter(m => m.name === name);
+-    let filtered = this.metrics.filter(m => m.name !== name);
++    let filtered = this.metrics.filter(m => m.name === name);
      if (startTime) {
 -      filtered = filtered.filter(m => m.timestamp > startTime);
 +      filtered = filtered.filter(m => m.timestamp >= startTime);

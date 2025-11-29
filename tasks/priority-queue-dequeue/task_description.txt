@@ -1,13 +1,26 @@
-task_description: |
-  Fix the dequeue operation in PriorityQueue class. The current implementation
+task: priority-queue-dequeue
+instructions: |
+  You need to fix  the operation of dequeue that is present  in tha  Priority Queue class that is present in `src/scheduler/PriorityQueue.ts`. The current implementation
   uses pop() instead of shift(), which removes the highest priority item from
   the wrong end of the array.
+
+
+
+
   
   Expected behavior:
   - dequeue() should remove and return the item with the highest priority
   - The highest priority item is at the beginning of the sorted array
   - Use shift() to remove from the front, not pop() from the end
   - Maintain correct priority ordering after dequeue operations
+  - The queue should maintain correct size after dequeue operations
+  - peek() and dequeue() should return the same item when called in sequence
+
+
+
+
+
+
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -15,3 +28,18 @@ difficulty: medium
 category: data-structure
 tags: [priority-queue, dequeue, array-operations]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
