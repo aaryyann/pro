@@ -1,21 +1,28 @@
-task_description: |
-  So I was debugging this issue with the TaskScheduler and noticed that tasks aren't executing properly. 
-  Looking at the start() method in src/scheduler/TaskScheduler.ts (which gets compiled to dist/scheduler/TaskScheduler.js), 
-  the handler() function calls aren't being awaited. This means the scheduler moves on before handlers finish, 
-  which breaks everything.
-  
-  The problem is on line 28 where it just calls task.handler() without await. This causes handlers to fire off 
-  but the scheduler doesn't wait for them, so tasks get removed from the queue before they're actually done. 
-  Also, if a handler throws an error, it'll crash the whole scheduler loop since there's no try-catch.
-  
-  What needs to happen:
-  - Handlers need to be awaited so they actually complete before removal
-  - Error handling should wrap handler calls so one failing task doesn't kill the scheduler
-  - Tasks should execute in the correct order based on their executeAt timestamp (earlier ones first)
-  - Handler return values should be properly handled (even if they're just void)
-  - Nested async operations inside handlers need to complete fully
-  - Multiple tasks running at the same time should all complete properly
-  - The scheduler should keep running even if one task throws an error
+task: async-task-execution
+instructions: |
+  The  Task Scheduler  in `src/scheduler/TaskScheduler.ts` has  the issues with  such that how it executes the async task handlers. The scheduler  does not properly await the handlers, through which it causes tasks to be removed before they completely executed, and errors in the handlers crash the entire scheduler.
+
+  The main problem is present  in the `start()` method is that   when a task's execution time arrives, the
+  handler is called without using  `await`, so the scheduler instantaneously moves on forward and removes the task from the queue before the handler executes completely. This breaks async operations
+  inside handlers and causes race conditions.
+
+  There is  also no error handling around handler execution, so if any of the handler throws an
+  error, it crashes the entire scheduler loop and stops executing the remaining tasks.
+
+
+
+  The fixes should happen in the `start()` method
+  `async start() is  Promise<void>`
+
+  Here is what needs to be corrected in the
+  Task handlers must be awaited so that they complete before it get removes from the queue.
+  Handler calls should be wrapped in try and catch block so if errors comes it do not crash the scheduler.
+  Tasks scheduled for the exact current time should be included that is use <= instead of <.
+  The scheduler should check for ready tasks more frequently , it must reduces the sleep interval.
+  All async operations inside handlers must executed completely before task removal.
+  The scheduler must continue running even if individual tasks fail.
+
+  Don't change the method signatures or the class structure. Only fix the execution logic in the `start()` method.
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -23,3 +30,21 @@ difficulty: medium
 category: scheduler
 tags: [async, error-handling, concurrency]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-permission-security-check:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/permission-security-check/run-tests.sh"]
     volumes:

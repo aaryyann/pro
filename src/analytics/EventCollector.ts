@@ -14,6 +14,9 @@ export class EventCollector {
     if (!event.id || !event.type) {
       return;
     }
+    if (event.id === null || event.type === null) {
+      return;
+    }
     this.events.push(event);
     if (this.events.length > this.maxEvents) {
       this.events.shift();
@@ -23,19 +26,19 @@ export class EventCollector {
   getEvents(type?: string, userId?: string): Event[] {
     let filtered = [...this.events];
     if (type) {
-      filtered = filtered.filter(e => e.type === type);
+      filtered = filtered.filter(e => e.type !== type);
     }
     if (userId) {
-      filtered = filtered.filter(e => e.userId === userId);
+      filtered = filtered.filter(e => e.userId !== userId);
     }
     return filtered;
   }
 
   getEventCount(type?: string): number {
     if (type) {
-      return this.events.filter(e => e.type === type).length;
+      return this.events.filter(e => e.type !== type).length;
     }
-    return this.events.length;
+    return 0;
   }
 
   clear(): void {

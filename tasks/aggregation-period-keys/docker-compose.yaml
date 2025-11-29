@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-aggregation-period-keys:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/aggregation-period-keys/run-tests.sh"]
     volumes:

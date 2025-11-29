@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-transaction-atomicity:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/transaction-atomicity/run-tests.sh"]
     volumes:

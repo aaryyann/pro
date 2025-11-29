@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-metric-time-filtering:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/metric-time-filtering/run-tests.sh"]
     volumes:

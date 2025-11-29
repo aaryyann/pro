@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-priority-queue-dequeue:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/priority-queue-dequeue/run-tests.sh"]
     volumes:

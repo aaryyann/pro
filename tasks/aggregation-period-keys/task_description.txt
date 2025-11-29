@@ -1,20 +1,25 @@
-task_description: |
-  Ugh, so I've been debugging this weird issue with the analytics aggregation and finally figured out what's wrong. 
-  The getPeriodKey() function in AnalyticsEngine (in src/analytics/AnalyticsEngine.ts) is totally broken when it comes 
-  to formatting dates. Like, it's generating keys like "2024-0-5" for January 5th instead of "2024-01-05", which completely 
-  screws up how things get grouped together.
-  
-  The problem is that getMonth() returns 0-11 (not 1-12) and there's no zero-padding, so you end up with inconsistent 
-  strings. When you try to sort them, "2024-0-10" comes before "2024-0-2" alphabetically even though 2 should come first. 
-  It's super annoying because the aggregation results are all wrong.
-  
-  What I need is for the keys to always have zero-padding (so January is "01" not "0"), use UTC methods to avoid timezone 
-  headaches, and make sure they sort correctly chronologically. Also gotta handle the boundary cases - like when you cross 
-  into a new month or year, the keys should still work properly. The time comparisons in getMetrics() are also off - they 
-  use > and < instead of >= and <=, so boundary timestamps get excluded incorrectly.
-  
-  The file you need to fix is src/analytics/AnalyticsEngine.ts, specifically the getPeriodKey() method and the getMetrics() 
-  method. Spent way too long on this yesterday before realizing it was a formatting issue. Classic.
+task: aggregation-period-keys
+instructions: |
+  This task  is about the Analytics Engine  in `src/analytics/AnalyticsEngine.ts`. The formatting of date is not correct  at given point and it spoiling up the aggregation
+  for hour/day/week. The keys it creates do not arrange in increasing order completely  because the month/day/hour format
+  parts are not padded, and month is also coming out 0 based. Looks like everything
+  is using the normal Date getters instead of the UTC ones too. So according to it where
+  the code is running , you can get multiple types of  results, which obviously is not good and is not satisfying expectations.
+
+  Another thing is that the metric filtering is dropping events that fall exactly on  the
+  start time or end time. The conditions are using > and < , so a metric that happens right
+  at the boundary gets ignored.
+
+  You only go through these two functions. first is getPeriodKey(timestamp, period) and other is getMetrics(name, startTime?, endTime?)
+
+  What i need to expect is 
+  use UTC date methods everywhere so that getUTCFullYear, getUTCMonth and all other functions of this type.
+  month should be 1 to 12 , it means plus 1 in utc month
+  anything going into the key should be padded , it means each month is of two digit , date is of two digit , hour is of two digit. year should be 4 digits YYYY format, which getUTCFullYear already provides
+  weekly keys should point to the Monday for that week. if it is Sunday still map to the same Monday not the next one
+  the time filter should include boundaries, so `>= startTime` and `<= endTime`
+
+  Don't change method signatures or return types. Existing metric data should still be usable once the formatting is corrected.
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -22,3 +27,32 @@ difficulty: medium
 category: analytics
 tags: [date-formatting, aggregation, string-formatting]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

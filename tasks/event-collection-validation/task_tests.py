@@ -33,7 +33,7 @@ def test_event_collection_with_valid_event():
         eventHasId: event ? (event.id !== undefined && event.id !== null) : false,
         eventHasType: event ? (event.type !== undefined && event.type !== null) : false,
         eventHasTimestamp: event ? (event.timestamp !== undefined && event.timestamp !== null) : false,
-        allFieldsPresent: event ? (event.id && event.type && event.timestamp) : false
+        allFieldsPresent: event ? !!(event.id && event.type && event.timestamp) : false
     }));
     """
     
@@ -197,7 +197,7 @@ def test_event_collection_with_user_id():
         totalCount: totalCount,
         user1HasCorrectId: user1Events.length > 0 ? user1Events[0].id === 'event1' : false,
         user2HasCorrectId: user2Events.length > 0 ? user2Events[0].id === 'event2' : false,
-        hasEventWithoutUserId: eventsWithoutUserIdCount > 0
+        hasEventWithoutUserId: eventsWithoutUserId.length > 0
     }));
     """
     

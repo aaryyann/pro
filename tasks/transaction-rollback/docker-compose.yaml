@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-transaction-rollback:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/transaction-rollback/run-tests.sh"]
     volumes:

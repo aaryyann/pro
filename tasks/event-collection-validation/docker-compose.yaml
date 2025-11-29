@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-event-collection-validation:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/event-collection-validation/run-tests.sh"]
     volumes:

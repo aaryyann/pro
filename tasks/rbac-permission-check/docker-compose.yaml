@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-rbac-permission-check:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/rbac-permission-check/run-tests.sh"]
     volumes:

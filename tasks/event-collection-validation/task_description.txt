@@ -1,13 +1,18 @@
-task_description: |
-  Fix the event collection validation in EventCollector.collect().
-  The current implementation silently rejects events without id or type,
+task: event-collection-validation
+instructions: |
+  You have to fix the event collection validation that is present  in the EventCollector.collect(). The current implementation  silently rejects the events without id or type,
   but should handle this more gracefully or validate properly.
   
-  Expected behavior:
-  - Events should be validated before collection
-  - Invalid events should either be rejected with proper error handling
-  - Or validation should be more lenient if appropriate
-  - Events with missing required fields should be handled consistently
+
+
+  The Behaviour that are to be expected
+  Events should be validated before collection
+  Invalid events should either be rejected with proper error handling
+  Or validation should be more lenient if appropriate
+  Events with missing required fields should be handled consistently
+
+
+
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -15,3 +20,24 @@ difficulty: medium
 category: analytics
 tags: [validation, error-handling, data-integrity]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

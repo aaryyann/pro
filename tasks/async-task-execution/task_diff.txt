@@ -1,54 +1,24 @@
-diff --git a/package-lock.json b/package-lock.json
-index e1191f0..48f63c5 100644
---- a/package-lock.json
-+++ b/package-lock.json
-@@ -9,13 +9,13 @@
-       "version": "1.0.0",
-       "license": "MIT",
-       "dependencies": {
--        "express": "^4.18.2"
-+        "express": "4.21.2"
-       },
-       "devDependencies": {
--        "@types/express": "^4.17.21",
--        "@types/node": "^20.10.0",
--        "ts-node": "^10.9.2",
--        "typescript": "^5.3.3"
-+        "@types/express": "4.17.25",
-+        "@types/node": "20.19.25",
-+        "ts-node": "10.9.2",
-+        "typescript": "5.9.3"
-       }
-     },
-     "node_modules/@cspotcode/source-map-support": {
-diff --git a/package.json b/package.json
-index 6842b16..1837442 100644
---- a/package.json
-+++ b/package.json
-@@ -12,13 +12,13 @@
-   "author": "",
-   "license": "MIT",
-   "dependencies": {
--    "express": "^4.18.2"
-+    "express": "4.21.2"
-   },
-   "devDependencies": {
--    "@types/express": "^4.17.21",
--    "@types/node": "^20.10.0",
--    "ts-node": "^10.9.2",
--    "typescript": "^5.3.3"
-+    "@types/express": "4.17.25",
-+    "@types/node": "20.19.25",
-+    "ts-node": "10.9.2",
-+    "typescript": "5.9.3"
-   }
- }
- 
+diff --git a/docker-compose.yaml b/docker-compose.yaml
+index dc01f04..b839fbe 100644
+--- a/docker-compose.yaml
++++ b/docker-compose.yaml
+@@ -1,9 +1,10 @@
+ services:
+   app:
+     build: .
+-    image: compiler-observer:latest
++    image: projectz-base-runner:latest
+     command: [ "./run_tests.sh", "${TASK_ID:-BASE}" ]
+     environment:
+       - TASK_ID=${TASK_ID:-BASE}
+     volumes:
+       - .:/app
++      - ..:/workspace
 diff --git a/src/scheduler/TaskScheduler.ts b/src/scheduler/TaskScheduler.ts
-index 61da71d..dc0070b 100644
+index 61da71d..e400ad2 100644
 --- a/src/scheduler/TaskScheduler.ts
 +++ b/src/scheduler/TaskScheduler.ts
-@@ -22,14 +22,19 @@ export class TaskScheduler {
+@@ -22,14 +22,18 @@ export class TaskScheduler {
      this.isRunning = true;
      while (this.isRunning) {
        const now = new Date();
@@ -60,8 +30,7 @@ index 61da71d..dc0070b 100644
 +        try {
 +          await task.handler();
 +        } catch (error) {
-+          // Log error but continue scheduler execution
-+          console.error(`Error executing task ${task.id}:`, error);
++          // Continue processing other tasks even if one fails
 +        }
          this.tasks = this.tasks.filter(t => t.id !== task.id);
        }

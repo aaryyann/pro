@@ -3,7 +3,7 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-    image: compiler-observer:latest
+    image: projectz-async-task-execution:latest
     container_name: compiler-observability-test-build
     command: ["sh", "-c", "tasks/async-task-execution/run-tests.sh"]
     volumes:
