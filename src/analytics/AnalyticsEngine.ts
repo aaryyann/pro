@@ -23,7 +23,7 @@ export class AnalyticsEngine {
   }
 
   getMetrics(name: string, startTime?: Date, endTime?: Date): Metric[] {
-    let filtered = this.metrics.filter(m => m.name === name);
+    let filtered = this.metrics.filter(m => m.name !== name);
     if (startTime) {
       filtered = filtered.filter(m => m.timestamp > startTime);
     }

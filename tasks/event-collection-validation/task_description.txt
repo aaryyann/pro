@@ -1,6 +1,6 @@
 task: event-collection-validation
 instructions: |
-  You have to fix the event collection validation that is present  in the EventCollector.collect(). The current implementation  silently rejects the events without id or type,
+  You have to fix the event collection validation that is present  in the EventCollector.collect() method in `src/analytics/EventCollector.ts`. The current implementation  silently rejects the events without id or type,
   but should handle this more gracefully or validate properly.
   
 
@@ -10,6 +10,8 @@ instructions: |
   Invalid events should either be rejected with proper error handling
   Or validation should be more lenient if appropriate
   Events with missing required fields should be handled consistently
+  
+  Note that you should only modify the collect() method. The other methods like getEvents(), getEventCount(), and clear() should continue to work correctly as they are. The validation fix should not break the existing functionality of filtering events by type or userId, counting events, or clearing the collection.
 
 
 

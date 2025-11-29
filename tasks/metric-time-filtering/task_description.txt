@@ -1,13 +1,14 @@
-task_description: |
-  Fix the date comparison logic in AnalyticsEngine.getMetrics().
-  The current implementation uses strict inequality (>, <) which excludes
-  metrics at the exact boundary times. It should use inclusive comparison (>=, <=).
+task: metric-time-filtering
+instructions: |
+  You need to fix the date comparison logic that is present  in  the AnalyticsEngine.getMetrics() method that is present in the `src/analytics/AnalyticsEngine.ts`.
+  The current implementation uses strict inequality that are > and < , which excludes the
+  metrics at the exact boundary times. It should must   use the inclusive comparison that are  >= and <=.
   
-  Expected behavior:
-  - Metrics at startTime should be included
-  - Metrics at endTime should be included
-  - All metrics within the time range should be returned
-  - Edge cases with exact timestamps should be handled correctly
+  The Behaviour that should be expected is 
+  Metrics at startTime should be always included
+  Metrics at endTime should be always included
+  All metrics that are within the time range should always be returned
+  Edge cases with exact timestamps should be always handled correctly
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com
@@ -15,3 +16,20 @@ difficulty: medium
 category: analytics
 tags: [date-comparison, filtering, edge-cases]
 parser_name: pytest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

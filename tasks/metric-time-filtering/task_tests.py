@@ -12,7 +12,7 @@ def test_metrics_inclusive_start_time():
     Test that metrics at the exact startTime are included.
     """
     script = """
-    const { AnalyticsEngine } = require('../../dist/analytics/AnalyticsEngine');
+    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
     
     const engine = new AnalyticsEngine();
     const startTime = new Date('2024-01-01T10:00:00Z');
@@ -59,7 +59,7 @@ def test_metrics_inclusive_end_time():
     Test that metrics at the exact endTime are included.
     """
     script = """
-    const { AnalyticsEngine } = require('../../dist/analytics/AnalyticsEngine');
+    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
     
     const engine = new AnalyticsEngine();
     const endTime = new Date('2024-01-01T10:00:00Z');
@@ -106,7 +106,7 @@ def test_metrics_time_range_filtering():
     Test that metrics are correctly filtered within a time range.
     """
     script = """
-    const { AnalyticsEngine } = require('../../dist/analytics/AnalyticsEngine');
+    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
     
     const engine = new AnalyticsEngine();
     const startTime = new Date('2024-01-01T10:00:00Z');
@@ -170,7 +170,7 @@ def test_metrics_no_time_filter():
     Test that getMetrics returns all metrics when no time filter is provided.
     """
     script = """
-    const { AnalyticsEngine } = require('../../dist/analytics/AnalyticsEngine');
+    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
     
     const engine = new AnalyticsEngine();
     
@@ -209,7 +209,7 @@ def test_metrics_exact_boundary_times():
     Test that metrics with exact start and end times are included when startTime equals endTime.
     """
     script = """
-    const { AnalyticsEngine } = require('../../dist/analytics/AnalyticsEngine');
+    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
     
     const engine = new AnalyticsEngine();
     const exactTime = new Date('2024-01-01T10:00:00Z');
@@ -249,7 +249,7 @@ def test_metrics_multiple_metric_names():
     Test that filtering by metric name works correctly with multiple metric types.
     """
     script = """
-    const { AnalyticsEngine } = require('../../dist/analytics/AnalyticsEngine');
+    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
     
     const engine = new AnalyticsEngine();
     const time = new Date('2024-01-01T10:00:00Z');
