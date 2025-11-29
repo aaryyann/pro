@@ -11,7 +11,7 @@ def test_rollback_pending_transaction():
     Test that a PENDING transaction can be rolled back.
     """
     script = """
-    const { TransactionManager, TransactionStatus } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -47,7 +47,7 @@ def test_rollback_committed_transaction():
     Test that a COMMITTED transaction can be rolled back.
     """
     script = """
-    const { TransactionManager, TransactionStatus } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -84,7 +84,7 @@ def test_rollback_failed_transaction():
     Test that a FAILED transaction cannot be rolled back.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -121,7 +121,7 @@ def test_rollback_nonexistent_transaction():
     Test that rolling back a non-existent transaction returns false.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const rollbackResult = await manager.rollback('nonexistent_id');
@@ -150,7 +150,7 @@ def test_rollback_pending_with_operations():
     Test that rolling back a PENDING transaction with multiple operations works correctly.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -190,7 +190,7 @@ def test_rollback_idempotency():
     Test that rolling back an already rolled back transaction returns false.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -228,7 +228,7 @@ def test_rollback_empty_pending_transaction():
     Test that rolling back an empty PENDING transaction works correctly.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');

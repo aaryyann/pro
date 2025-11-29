@@ -1,5 +1,6 @@
-task_description: |
-  Fix the permission check logic in TransactionManager.hasPermission().
+task: rbac-permission-check
+instructions: |
+  Fix the permission check logic in TransactionManager.hasPermission() method that is present in `src/transaction/TransactionManager.ts`.
   The current implementation returns true for unknown roles, which is a
   security vulnerability. Unknown roles should be denied access.
   
@@ -8,6 +9,11 @@ task_description: |
   - Only roles with explicit permissions should be allowed
   - Default deny policy for security
   - Empty or null roles should be denied
+  - Known roles (admin, user, guest) should have their correct permissions
+  - Admin role should have all permissions (read, write, delete, execute)
+  - User role should have only read and write permissions
+  - Guest role should have only read permission
+  - Roles with special characters should be denied if not explicitly defined
 
 author_name: Adzzat
 author_email: aryanhonawar@gmail.com

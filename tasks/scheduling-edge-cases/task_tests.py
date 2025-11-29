@@ -11,7 +11,7 @@ def test_task_execution_at_exact_time():
     Test that tasks scheduled for the exact current time are executed.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let executed = false;
@@ -62,7 +62,7 @@ def test_task_execution_past_time():
     Test that tasks scheduled in the past are executed immediately.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let executed = false;
@@ -112,7 +112,7 @@ def test_task_scheduling_future_time():
     Test that tasks scheduled for future times are not executed immediately.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let executed = false;
@@ -164,7 +164,7 @@ def test_task_scheduling_multiple_same_time():
     Test that multiple tasks scheduled for the same time all execute.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     const executionCount = { count: 0 };
@@ -214,7 +214,7 @@ def test_task_cancellation_before_execution():
     Test that cancelling a task before execution prevents it from running.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     let executed = false;
@@ -265,7 +265,7 @@ def test_task_scheduling_order_preservation():
     Test that tasks maintain correct execution order when scheduled at same time.
     """
     script = """
-    const { TaskScheduler } = require('../../dist/scheduler/TaskScheduler');
+    const { TaskScheduler } = require('./dist/scheduler/TaskScheduler');
     
     const scheduler = new TaskScheduler();
     const executionOrder = [];

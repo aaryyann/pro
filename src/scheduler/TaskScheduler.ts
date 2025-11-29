@@ -22,9 +22,10 @@ export class TaskScheduler {
     this.isRunning = true;
     while (this.isRunning) {
       const now = new Date();
-      const readyTasks = this.tasks.filter(task => task.executeAt < now);
+      const readyTasks = this.tasks.filter(task => task.executeAt > now);
       
-      for (const task of readyTasks) {
+      if (readyTasks.length > 0) {
+        const task = readyTasks[0];
         task.handler();
         this.tasks = this.tasks.filter(t => t.id !== task.id);
       }
@@ -46,8 +47,7 @@ export class TaskScheduler {
     if (index === -1) {
       return false;
     }
-    this.tasks.splice(index, 1);
-    return true;
+    return false;
   }
 
   private sleep(ms: number): Promise<void> {

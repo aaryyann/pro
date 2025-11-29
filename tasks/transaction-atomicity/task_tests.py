@@ -11,7 +11,7 @@ def test_transaction_commit_success():
     Test that a transaction with all successful operations commits correctly.
     """
     script = """
-    const { TransactionManager, TransactionStatus } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -49,7 +49,7 @@ def test_transaction_commit_with_multiple_operations():
     Test that a transaction with multiple operations commits atomically.
     """
     script = """
-    const { TransactionManager, TransactionStatus } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -89,7 +89,7 @@ def test_transaction_empty_operations():
     Test that a transaction with no operations can be committed.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -125,7 +125,7 @@ def test_transaction_operation_order():
     Test that operations execute in the order they were added.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -180,7 +180,7 @@ def test_transaction_commit_idempotency():
     Test that committing an already committed transaction returns false.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -218,7 +218,7 @@ def test_transaction_large_number_operations():
     Test that transactions with many operations commit correctly.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const txn = manager.createTransaction('user1', 'admin');
@@ -263,7 +263,7 @@ def test_transaction_nonexistent_id():
     Test that committing a non-existent transaction returns false.
     """
     script = """
-    const { TransactionManager } = require('../../dist/transaction/TransactionManager');
+    const { TransactionManager } = require('./dist/transaction/TransactionManager');
     
     const manager = new TransactionManager();
     const commitResult = await manager.commit('nonexistent_id');
