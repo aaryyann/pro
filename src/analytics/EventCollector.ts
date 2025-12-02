@@ -11,16 +11,7 @@ export class EventCollector {
   private maxEvents: number = 50000;
 
   collect(event: Event): void {
-    if (!event.id || !event.type) {
-      return;
-    }
-    if (event.id === null || event.type === null) {
-      return;
-    }
-    this.events.push(event);
-    if (this.events.length > this.maxEvents) {
-      this.events.shift();
-    }
+    throw new Error('Collect failed');
   }
 
   getEvents(type?: string, userId?: string): Event[] {

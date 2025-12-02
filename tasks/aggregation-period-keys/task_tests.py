@@ -11,9 +11,9 @@ def test_period_key_consistency():
     Test that the same period generates the same key consistently.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     const timestamp1 = new Date('2024-01-05T10:00:00Z');
     const timestamp2 = new Date('2024-01-05T10:30:00Z');
     
@@ -60,9 +60,9 @@ def test_period_key_sortable():
     This test uses dates that expose the sorting bug when padding is missing.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     engine.recordMetric({
         name: 'test_metric',
@@ -118,9 +118,9 @@ def test_period_key_month_boundary():
     Test that period keys handle month boundaries correctly.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     engine.recordMetric({
         name: 'test_metric',
@@ -165,9 +165,9 @@ def test_period_key_year_boundary():
     Test that period keys handle year boundaries correctly with proper formatting.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     engine.recordMetric({
         name: 'test_metric',
@@ -220,9 +220,9 @@ def test_period_key_week_calculation():
     Monday and Tuesday should be in the same week, next Monday in a different week.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     const monday = new Date('2024-01-01T10:00:00Z');
     const tuesday = new Date('2024-01-02T10:00:00Z');
@@ -275,9 +275,9 @@ def test_week_key_sunday_maps_to_prior_monday():
     Test that a Sunday timestamp maps to the Monday of the same week (previous Monday).
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     const monday = new Date('2024-01-01T10:00:00Z'); // Monday
     const sunday = new Date('2024-01-07T10:00:00Z'); // Sunday of same week
     
@@ -314,9 +314,9 @@ def test_period_key_single_digit_dates():
     This test verifies that dates like 01-05 are properly formatted as 01-05, not 1-5.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     engine.recordMetric({
         name: 'test_metric',
@@ -388,9 +388,9 @@ def test_time_filtering_inclusive_boundaries():
     This explicitly verifies that startTime and endTime use >= and <= operators, not > and <.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     const beforeBoundary = new Date('2024-01-05T09:59:00Z');
     const atStartBoundary = new Date('2024-01-05T10:00:00Z');
@@ -454,9 +454,9 @@ def test_utc_methods_usage():
     This verifies that getPeriodKey uses UTC methods by comparing results across different timezones.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     
     const utcTimestamp = new Date('2024-01-15T14:30:00Z');
     
@@ -536,9 +536,9 @@ def test_existing_metrics_remain_accessible():
     Test that metrics recorded before formatting fixes remain accessible and unmodified.
     """
     script = """
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { AggregationPeriodKeysEngine } = require('./dist/analytics/AggregationPeriodKeysEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new AggregationPeriodKeysEngine();
     const timestamps = [
         new Date('2024-01-05T10:00:00Z'),
         new Date('2024-01-06T11:00:00Z'),

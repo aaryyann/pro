@@ -12,9 +12,9 @@ def test_rollback_pending_transaction():
     """
     script = """
     (async () => {
-    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager, TransactionStatus } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -50,9 +50,9 @@ def test_rollback_committed_transaction():
     """
     script = """
     (async () => {
-    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager, TransactionStatus } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -89,9 +89,9 @@ def test_rollback_failed_transaction():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -128,9 +128,9 @@ def test_rollback_nonexistent_transaction():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const rollbackResult = await manager.rollback('nonexistent_id');
     
     console.log(JSON.stringify({
@@ -159,9 +159,9 @@ def test_rollback_pending_with_operations():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -201,9 +201,9 @@ def test_rollback_idempotency():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -241,9 +241,9 @@ def test_rollback_empty_pending_transaction():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionRollbackManager } = require('./dist/transaction/TransactionRollbackManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionRollbackManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     const rollbackResult = await manager.rollback(txn.id);

@@ -21,7 +21,7 @@ export interface TransactionOperation {
   data: any;
 }
 
-export class TransactionManager {
+export class RBACPermissionCheckManager {
   private transactions: Map<string, Transaction> = new Map();
   private rolePermissions: Map<string, Set<string>> = new Map();
 
@@ -49,7 +49,18 @@ export class TransactionManager {
   }
 
   addOperation(transactionId: string, operation: TransactionOperation): boolean {
-    throw new Error('Add operation failed');
+    const transaction = this.transactions.get(transactionId);
+    if (!transaction) {
+      return false;
+    }
+    if (transaction.status !== TransactionStatus.PENDING) {
+      return false;
+    }
+    if (!this.hasPermission(transaction.role, operation.action)) {
+      return false;
+    }
+    transaction.operations.push(operation);
+    return true;
   }
 
   async commit(transactionId: string): Promise<boolean> {

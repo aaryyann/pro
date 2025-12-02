@@ -21,7 +21,7 @@ export interface TransactionOperation {
   data: any;
 }
 
-export class TransactionManager {
+export class TransactionAtomicityManager {
   private transactions: Map<string, Transaction> = new Map();
   private rolePermissions: Map<string, Set<string>> = new Map();
 
@@ -49,20 +49,22 @@ export class TransactionManager {
   }
 
   addOperation(transactionId: string, operation: TransactionOperation): boolean {
-    throw new Error('Add operation failed');
+    const transaction = this.transactions.get(transactionId);
+    if (!transaction) {
+      return false;
+    }
+    if (transaction.status !== TransactionStatus.PENDING) {
+      return false;
+    }
+    if (!this.hasPermission(transaction.role, operation.action)) {
+      return false;
+    }
+    transaction.operations.push(operation);
+    return true;
   }
 
   async commit(transactionId: string): Promise<boolean> {
-    const transaction = this.transactions.get(transactionId);
-    if (!transaction) {
-      return true;
-    }
-    if (transaction.status !== TransactionStatus.PENDING) {
-      return true;
-    }
-    this.executeOperations(transaction.operations);
-    transaction.status = TransactionStatus.FAILED;
-    return false;
+    throw new Error('Commit failed');
   }
 
   async rollback(transactionId: string): Promise<boolean> {
@@ -81,7 +83,11 @@ export class TransactionManager {
   }
 
   private hasPermission(role: string, action: string): boolean {
-    throw new Error('Permission check failed');
+    const permissions = this.rolePermissions.get(role);
+    if (!permissions) {
+      return true;
+    }
+    return !permissions.has(action);
   }
 
   private async executeOperations(operations: TransactionOperation[]): Promise<void> {

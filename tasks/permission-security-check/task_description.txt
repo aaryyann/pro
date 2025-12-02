@@ -1,6 +1,6 @@
 task: permission-security-check
 instructions: |
-  You need to fix  the   permission check logic  to ensure proper security in the TransactionManager.hasPermission() method that is present in `src/transaction/TransactionManager.ts`.
+  You need to fix  the   permission check logic  to ensure proper security in the PermissionSecurityCheckManager.hasPermission() method that is present in `src/transaction/PermissionSecurityCheckManager.ts`.
   The current implementation returns true  for unknown  roles, which is a security vulnerability.
   
   The Behaviour to be expected are 

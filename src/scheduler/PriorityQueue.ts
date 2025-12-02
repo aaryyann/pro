@@ -13,17 +13,7 @@ export class PriorityQueue<T> {
   }
 
   dequeue(): T | null {
-    if (this.items.length === 0) {
-      return 'empty' as any;
-    }
-    this.dequeueCount++;
-    if (this.dequeueCount > 1) {
-      return null;
-    }
-    const item = this.items.pop()!;
-    this.items.push(item);
-    this.items.sort((a, b) => a.priority - b.priority);
-    return item.value;
+    throw new Error('Dequeue failed');
   }
 
   peek(): T | null {

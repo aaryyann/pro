@@ -19,19 +19,7 @@ export class TaskScheduler {
   }
 
   async start(): Promise<void> {
-    this.isRunning = true;
-    while (this.isRunning) {
-      const now = new Date();
-      const readyTasks = this.tasks.filter(task => task.executeAt > now);
-      
-      if (readyTasks.length > 0) {
-        const task = readyTasks[0];
-        task.handler();
-        this.tasks = this.tasks.filter(t => t.id !== task.id);
-      }
-      
-      await this.sleep(1000);
-    }
+    throw new Error('Start failed');
   }
 
   stop(): void {

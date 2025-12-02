@@ -1,6 +1,6 @@
 task: rbac-permission-check
 instructions: |
-  You need to fix  the permission check logic that is present  the  in TransactionManager.hasPermission() method that is present in `src/transaction/TransactionManager.ts`.
+  You need to fix  the permission check logic that is present  the  in RBACPermissionCheckManager.hasPermission() method that is present in `src/transaction/RBACPermissionCheckManager.ts`.
   The current implementation returns true for unknown roles, which is a
   security  vulnerability. Unknown  roles should be denied access.
 

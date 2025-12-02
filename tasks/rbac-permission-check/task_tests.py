@@ -11,9 +11,9 @@ def test_unknown_role_permission_denied():
     Test that unknown roles are denied all permissions.
     """
     script = """
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', 'unknown_role');
     
     const result = manager.addOperation(txn.id, {
@@ -47,9 +47,9 @@ def test_known_role_permission_allowed():
     Test that known roles with permissions are allowed.
     """
     script = """
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     const result = manager.addOperation(txn.id, {
@@ -83,9 +83,9 @@ def test_guest_role_read_only():
     Test that guest role can only perform read operations.
     """
     script = """
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', 'guest');
     
     const readResult = manager.addOperation(txn.id, {
@@ -129,9 +129,9 @@ def test_empty_role_permission_denied():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', '');
     
     const result = manager.addOperation(txn.id, {
@@ -167,9 +167,9 @@ def test_null_role_permission_denied():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', null);
     
     const result = manager.addOperation(txn.id, {
@@ -205,9 +205,9 @@ def test_undefined_role_permission_denied():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', undefined);
     
     const result = manager.addOperation(txn.id, {
@@ -242,9 +242,9 @@ def test_admin_role_all_permissions():
     Test that admin role has all permissions (read, write, delete, execute).
     """
     script = """
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     const readResult = manager.addOperation(txn.id, { type: 'read', resource: 'data1', action: 'read', data: {} });
@@ -282,9 +282,9 @@ def test_user_role_limited_permissions():
     Test that user role has only read and write permissions.
     """
     script = """
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', 'user');
     
     const readResult = manager.addOperation(txn.id, { type: 'read', resource: 'data1', action: 'read', data: {} });
@@ -319,9 +319,9 @@ def test_special_characters_role():
     Test that roles with special characters are handled correctly.
     """
     script = """
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { RBACPermissionCheckManager } = require('./dist/transaction/RBACPermissionCheckManager');
     
-    const manager = new TransactionManager();
+        const manager = new RBACPermissionCheckManager();
     const txn = manager.createTransaction('user1', 'role@123');
     
     const result = manager.addOperation(txn.id, {

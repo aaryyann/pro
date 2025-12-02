@@ -11,7 +11,7 @@ export interface AggregationResult {
   period: string;
 }
 
-export class AnalyticsEngine {
+export class MetricTimeFilteringEngine {
   private metrics: Metric[] = [];
   private maxMetrics: number = 10000;
 

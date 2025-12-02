@@ -1,6 +1,6 @@
 task: transaction-rollback
 instructions: |
-  You need to fix  the rollback operation to allow rolling back PENDING transactions that is present in the TransactionManager.rollback() method that is present in `src/transaction/TransactionManager.ts`.
+  You need to fix  the rollback operation to allow rolling back PENDING transactions that is present in the TransactionRollbackManager.rollback() method that is present in `src/transaction/TransactionRollbackManager.ts`.
   Currently, rollback only works  on COMMITTED  transactions , but it should also work on PENDING transactions that haven't been committed yet.
   
   The Behaviours that are expected

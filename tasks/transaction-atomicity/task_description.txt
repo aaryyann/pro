@@ -1,6 +1,6 @@
 task: transaction-atomicity
 instructions: |
-  You  need to fix   the transaction   commit operation to ensure proper atomicity that is present in the TransactionManager.commit() method that is present in `src/transaction/TransactionManager.ts`.
+  You  need to fix   the transaction   commit operation to ensure proper atomicity that is present in the TransactionAtomicityManager.commit() method that is present in `src/transaction/TransactionAtomicityManager.ts`.
   The current implementation does not  handle  the  partial failures correctly ,
   and the   transactions may be left in an inconsistent state.
   

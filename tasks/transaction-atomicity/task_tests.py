@@ -12,9 +12,9 @@ def test_transaction_commit_success():
     """
     script = """
     (async () => {
-    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager, TransactionStatus } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -52,9 +52,9 @@ def test_transaction_commit_with_multiple_operations():
     """
     script = """
     (async () => {
-    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager, TransactionStatus } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -94,9 +94,9 @@ def test_transaction_empty_operations():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     const commitResult = await manager.commit(txn.id);
@@ -132,9 +132,9 @@ def test_transaction_operation_order():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     const executionOrder = [];
     
@@ -189,9 +189,9 @@ def test_transaction_commit_idempotency():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });
@@ -229,9 +229,9 @@ def test_transaction_large_number_operations():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     for (let i = 0; i < 10; i++) {
@@ -276,9 +276,9 @@ def test_transaction_nonexistent_id():
     """
     script = """
     (async () => {
-    const { TransactionManager } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const commitResult = await manager.commit('nonexistent_id');
     
     console.log(JSON.stringify({
@@ -312,9 +312,9 @@ def test_transaction_operation_failure_rollback():
     """
     script = """
     (async () => {
-    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager, TransactionStatus } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     // Add operations to the transaction
@@ -374,9 +374,9 @@ def test_transaction_failed_state_after_error():
     """
     script = """
     (async () => {
-    const { TransactionManager, TransactionStatus } = require('./dist/transaction/TransactionManager');
+        const { TransactionAtomicityManager, TransactionStatus } = require('./dist/transaction/TransactionAtomicityManager');
     
-    const manager = new TransactionManager();
+        const manager = new TransactionAtomicityManager();
     const txn = manager.createTransaction('user1', 'admin');
     
     manager.addOperation(txn.id, { type: 'write', resource: 'data1', action: 'write', data: { value: 1 } });

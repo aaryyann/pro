@@ -21,7 +21,7 @@ export interface TransactionOperation {
   data: any;
 }
 
-export class TransactionManager {
+export class PermissionSecurityCheckManager {
   private transactions: Map<string, Transaction> = new Map();
   private rolePermissions: Map<string, Set<string>> = new Map();
 
@@ -81,7 +81,11 @@ export class TransactionManager {
   }
 
   private hasPermission(role: string, action: string): boolean {
-    throw new Error('Permission check failed');
+    const permissions = this.rolePermissions.get(role);
+    if (!permissions) {
+      return true;
+    }
+    return !permissions.has(action);
   }
 
   private async executeOperations(operations: TransactionOperation[]): Promise<void> {

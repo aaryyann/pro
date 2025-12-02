@@ -13,9 +13,9 @@ def test_metrics_inclusive_start_time():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const startTime = new Date('2024-01-01T10:00:00Z');
     
     engine.recordMetric({
@@ -62,9 +62,9 @@ def test_metrics_inclusive_end_time():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const endTime = new Date('2024-01-01T10:00:00Z');
     
     engine.recordMetric({
@@ -111,9 +111,9 @@ def test_metrics_time_range_filtering():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const startTime = new Date('2024-01-01T10:00:00Z');
     const endTime = new Date('2024-01-01T10:00:10Z');
     
@@ -177,9 +177,9 @@ def test_metrics_no_time_filter():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     
     for (let i = 0; i < 5; i++) {
         engine.recordMetric({
@@ -218,9 +218,9 @@ def test_metrics_exact_boundary_times():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const exactTime = new Date('2024-01-01T10:00:00Z');
     
     engine.recordMetric({
@@ -260,9 +260,9 @@ def test_metrics_multiple_metric_names():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const time = new Date('2024-01-01T10:00:00Z');
     
     engine.recordMetric({ name: 'metric1', value: 10, timestamp: time, tags: {} });
@@ -300,9 +300,9 @@ def test_metrics_name_filtering_with_time_range():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const startTime = new Date('2024-01-01T10:00:00Z');
     const endTime = new Date('2024-01-01T10:00:10Z');
     const withinTime = new Date('2024-01-01T10:00:05Z');
@@ -358,9 +358,9 @@ def test_metrics_name_filtering_before_time_filtering():
     """
     script = """
     (async () => {
-    const { AnalyticsEngine } = require('./dist/analytics/AnalyticsEngine');
+        const { MetricTimeFilteringEngine } = require('./dist/analytics/MetricTimeFilteringEngine');
     
-    const engine = new AnalyticsEngine();
+        const engine = new MetricTimeFilteringEngine();
     const startTime = new Date('2024-01-01T10:00:00Z');
     const endTime = new Date('2024-01-01T10:00:10Z');
     

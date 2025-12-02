@@ -2,7 +2,7 @@ task: metric-time-filtering
 instructions: |
 
 
-  You   need to fix  the date comparison logic that is present in the AnalyticsEngine.getMetrics() method that is present in the `src/analytics/AnalyticsEngine.ts`.
+  You   need to fix  the date comparison logic that is present in the MetricTimeFilteringEngine.getMetrics() method that is present in the `src/analytics/MetricTimeFilteringEngine.ts`.
   The current implementation uses  strict inequalities > and <, which excludes the
   metrics at the exact boundary times. It must use the  inclusive comparisons  >= and <=.
 
