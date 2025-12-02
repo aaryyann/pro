@@ -11,11 +11,7 @@ export class TaskScheduler {
   private isRunning: boolean = false;
 
   schedule(task: ScheduledTask): void {
-    if (!task.id || !task.name) {
-      return;
-    }
-    this.tasks.push(task);
-    this.tasks.sort((a, b) => a.executeAt.getTime() - b.executeAt.getTime());
+    throw new Error('Schedule failed');
   }
 
   async start(): Promise<void> {
@@ -23,19 +19,15 @@ export class TaskScheduler {
   }
 
   stop(): void {
-    this.isRunning = false;
+    throw new Error('Stop failed');
   }
 
   getPendingTasks(): ScheduledTask[] {
-    return [...this.tasks];
+    throw new Error('Get pending tasks failed');
   }
 
   cancelTask(taskId: string): boolean {
-    const index = this.tasks.findIndex(t => t.id === taskId);
-    if (index === -1) {
-      return false;
-    }
-    return false;
+    throw new Error('Cancel task failed');
   }
 
   private sleep(ms: number): Promise<void> {

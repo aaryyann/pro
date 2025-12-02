@@ -15,22 +15,17 @@ export class AggregationPeriodKeysEngine {
   private metrics: Metric[] = [];
   private maxMetrics: number = 10000;
 
+  constructor() {
+    // Keep private methods for future fixes (suppress unused warning)
+    void this.getPeriodKey;
+  }
+
   recordMetric(metric: Metric): void {
-    this.metrics.push(metric);
-    if (this.metrics.length > this.maxMetrics) {
-      this.metrics.shift();
-    }
+    throw new Error('Record metric failed');
   }
 
   getMetrics(name: string, startTime?: Date, endTime?: Date): Metric[] {
-    let filtered = this.metrics.filter(m => m.name !== name);
-    if (startTime) {
-      filtered = filtered.filter(m => m.timestamp > startTime);
-    }
-    if (endTime) {
-      filtered = filtered.filter(m => m.timestamp < endTime);
-    }
-    return filtered;
+    throw new Error('Get metrics failed');
   }
 
   aggregate(name: string, period: 'hour' | 'day' | 'week'): AggregationResult[] {
@@ -38,10 +33,7 @@ export class AggregationPeriodKeysEngine {
   }
 
   getTopMetrics(name: string, limit: number = 10): Metric[] {
-    const metrics = this.getMetrics(name);
-    return metrics
-      .sort((a, b) => b.value - a.value)
-      .slice(0, limit);
+    throw new Error('Get top metrics failed');
   }
 
   private getPeriodKey(timestamp: Date, period: 'hour' | 'day' | 'week'): string {

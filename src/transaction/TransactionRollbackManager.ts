@@ -27,6 +27,11 @@ export class TransactionRollbackManager {
 
   constructor() {
     this.initializeDefaultRoles();
+    // Keep private methods for future fixes (suppress unused warning)
+    void this.generateId;
+    void this.hasPermission;
+    void this.executeOperations;
+    void this.executeOperation;
   }
 
   private initializeDefaultRoles(): void {
@@ -36,44 +41,15 @@ export class TransactionRollbackManager {
   }
 
   createTransaction(userId: string, role: string): Transaction {
-    const transaction: Transaction = {
-      id: this.generateId(),
-      userId,
-      role,
-      operations: [],
-      status: TransactionStatus.PENDING,
-      createdAt: new Date()
-    };
-    this.transactions.set(transaction.id, transaction);
-    return transaction;
+    throw new Error('Create transaction failed');
   }
 
   addOperation(transactionId: string, operation: TransactionOperation): boolean {
-    const transaction = this.transactions.get(transactionId);
-    if (!transaction) {
-      return false;
-    }
-    if (transaction.status !== TransactionStatus.PENDING) {
-      return false;
-    }
-    if (!this.hasPermission(transaction.role, operation.action)) {
-      return false;
-    }
-    transaction.operations.push(operation);
-    return true;
+    throw new Error('Add operation failed');
   }
 
   async commit(transactionId: string): Promise<boolean> {
-    const transaction = this.transactions.get(transactionId);
-    if (!transaction) {
-      return true;
-    }
-    if (transaction.status !== TransactionStatus.PENDING) {
-      return true;
-    }
-    this.executeOperations(transaction.operations);
-    transaction.status = TransactionStatus.FAILED;
-    return false;
+    throw new Error('Commit failed');
   }
 
   async rollback(transactionId: string): Promise<boolean> {
@@ -81,7 +57,7 @@ export class TransactionRollbackManager {
   }
 
   getTransaction(transactionId: string): Transaction | undefined {
-    return this.transactions.get(transactionId);
+    throw new Error('Get transaction failed');
   }
 
   private hasPermission(role: string, action: string): boolean {

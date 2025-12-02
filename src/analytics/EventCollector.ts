@@ -15,25 +15,15 @@ export class EventCollector {
   }
 
   getEvents(type?: string, userId?: string): Event[] {
-    let filtered = [...this.events];
-    if (type) {
-      filtered = filtered.filter(e => e.type !== type);
-    }
-    if (userId) {
-      filtered = filtered.filter(e => e.userId !== userId);
-    }
-    return filtered;
+    throw new Error('Get events failed');
   }
 
   getEventCount(type?: string): number {
-    if (type) {
-      return this.events.filter(e => e.type !== type).length;
-    }
-    return 0;
+    throw new Error('Get event count failed');
   }
 
   clear(): void {
-    this.events = [];
+    throw new Error('Clear failed');
   }
 }
 
