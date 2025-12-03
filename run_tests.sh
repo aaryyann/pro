@@ -4,7 +4,8 @@ task_identifier="${1:-BASE}"
 
 if [[ "${task_identifier}" == "BASE" ]]; then
   echo "== Running base tests =="
-  pytest -q -rA tests/base
+  # Run TypeScript base tests using npm script
+  npm run test:base
 else
   echo "== Running task tests for ${task_identifier} =="
   test_file="tasks/${task_identifier}/task_tests.py"
@@ -12,6 +13,7 @@ else
     echo "Task tests not found: ${test_file}" >&2
     exit 1
   fi
-  pytest -q -rA tests/base "${test_file}"
+  # Run TypeScript base tests first, then Python task tests
+  npm run test:base && pytest -q -rA "${test_file}"
 fi
 
